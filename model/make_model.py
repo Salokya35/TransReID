@@ -51,7 +51,7 @@ class Backbone(nn.Module):
     def __init__(self, num_classes, cfg):
         super(Backbone, self).__init__()
         last_stride = cfg.MODEL.LAST_STRIDE
-        model_path = cfg.MODEL.PRETRAIN_PATH
+        model_path = '/content/drive/MyDrive/Trained Models/deit_base_distilled_patch16_224-df68dfff.pth'
         model_name = cfg.MODEL.NAME
         pretrain_choice = cfg.MODEL.PRETRAIN_CHOICE
         self.cos_layer = cfg.MODEL.COS_LAYER
@@ -215,7 +215,7 @@ class build_transformer(nn.Module):
 class build_transformer_local(nn.Module):
     def __init__(self, num_classes, camera_num, view_num, cfg, factory, rearrange):
         super(build_transformer_local, self).__init__()
-        model_path = cfg.MODEL.PRETRAIN_PATH
+        model_path = '/content/drive/MyDrive/Trained Models/deit_base_distilled_patch16_224-df68dfff.pth'
         pretrain_choice = cfg.MODEL.PRETRAIN_CHOICE
         self.cos_layer = cfg.MODEL.COS_LAYER
         self.neck = cfg.MODEL.NECK
@@ -237,6 +237,7 @@ class build_transformer_local(nn.Module):
         self.base = factory[cfg.MODEL.TRANSFORMER_TYPE](img_size=cfg.INPUT.SIZE_TRAIN, sie_xishu=cfg.MODEL.SIE_COE, local_feature=cfg.MODEL.JPM, camera=camera_num, view=view_num, stride_size=cfg.MODEL.STRIDE_SIZE, drop_path_rate=cfg.MODEL.DROP_PATH)
 
         if pretrain_choice == 'imagenet':
+            print("model_path is: ",model_path )
             self.base.load_param(model_path)
             print('Loading pretrained ImageNet model......from {}'.format(model_path))
 
