@@ -246,7 +246,6 @@ class HybridEmbed(nn.Module):
         x = self.proj(x).flatten(2).transpose(1, 2)
         return x
 
-
 class PatchEmbed_overlap(nn.Module):
     """ Image to Patch Embedding with overlapping patches
     """
@@ -406,6 +405,7 @@ class TransReID(nn.Module):
         x = self.forward_features(x, cam_label, view_label)
         return x
 
+    
     def load_param(self, model_path):
         param_dict = torch.load(model_path, map_location='cpu')
         if 'model' in param_dict:
